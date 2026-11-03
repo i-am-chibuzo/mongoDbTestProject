@@ -4,14 +4,19 @@ package africa.semicolon.mongoDbTestProject.data.repositories;
 import africa.semicolon.mongoDbTestProject.data.models.OurModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import africa.semicolon.mongoDbTestProject.EmbeddedMongoTest;
+
 import org.springframework.boot.data.mongodb.test.autoconfigure.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DataMongoTest
+@SpringBootTest
 public class OurRepositoryTest {
 
     @Autowired
@@ -19,6 +24,7 @@ public class OurRepositoryTest {
 
     @Test
     public void testSaveAndFindOurModel() {
+        ourRepository.deleteAll();
         OurModel ourModel = new OurModel();
         ourModel.setName("Test Name");
         ourModel.setDescription("Test Description");
